@@ -8,7 +8,8 @@ app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
 }))
-
+// we have added setting to accept data from json , url , images
+//accept limit
 app.use(express.json({limit: "16kb"}))
 app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(express.static("public"))

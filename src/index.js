@@ -9,6 +9,7 @@ dotenv.config({
 
 
 connectDB()
+// we have written async method complete and it written promise
 .then(() => {
     app.listen(process.env.PORT || 8000, () => {
         console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
