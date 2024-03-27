@@ -6,8 +6,6 @@ dotenv.config({
     path: './.env'
 })
 
-
-
 connectDB()
 // we have written async method complete and it written promise
 .then(() => {

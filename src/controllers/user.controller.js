@@ -14,7 +14,9 @@ const generateAccessAndRefereshTokens = async(userId) =>{
         const refreshToken = user.generateRefreshToken()
 
         user.refreshToken = refreshToken
+        // user.refreshToken = refreshToken: This line assigns the newly generated refresh token (refreshToken) to the refreshToken property of the user object. This operation updates the refreshToken field in the user document with the newly generated refresh token value.
         await user.save({ validateBeforeSave: false })
+        //  This line saves the updated user object back to the database. The await keyword is used because user.save() returns a promise since it's an asynchronous operation. By using await, the code waits for the user.save() operation to complete before moving on to the next line of code.
 
         return {accessToken, refreshToken}
 
@@ -37,7 +39,7 @@ const registerUser = asyncHandler( async (req, res) => {
 
 
     const {fullName, email, username, password } = req.body
-    //console.log("email: ", email);
+    console.log("email: ", email);
 
     if (
         [fullName, email, username, password].some((field) => field?.trim() === "")
@@ -83,7 +85,7 @@ const registerUser = asyncHandler( async (req, res) => {
         password,
         username: username.toLowerCase()
     })
-
+console.log(user);
     const createdUser = await User.findById(user._id).select(
         "-password -refreshToken"
     )
@@ -122,6 +124,7 @@ const loginUser = asyncHandler(async (req, res) =>{
     const user = await User.findOne({
         $or: [{username}, {email}]
     })
+    // or is coming from mongoose 
 
     if (!user) {
         throw new ApiError(404, "User does not exist")
